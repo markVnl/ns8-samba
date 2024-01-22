@@ -3,7 +3,7 @@
 set -e
 images=()
 
-repobase="${REPOBASE:-ghcr.io/nethserver}"
+repobase="${REPOBASE:-ghcr.io/markvnl}"
 reponame="ubuntu-samba"
 user_manager_version=v0.7.0
 
@@ -83,7 +83,7 @@ buildah add "${container}" imageroot /imageroot
 buildah add "${container}" ns8-user-manager-${user_manager_version}.tar.gz /imageroot/api-moduled/public
 buildah add "${container}" ui/dist /ui
 buildah config \
-    --label "org.nethserver.images=ghcr.io/nethserver/samba-dc:${IMAGETAG:-latest}" \
+    --label "org.nethserver.images=${repobase}/samba-dc:${IMAGETAG:-latest}" \
     --label 'org.nethserver.authorizations=node:fwadm ldapproxy@node:accountprovider cluster:accountprovider traefik@node:routeadm' \
     --label="org.nethserver.tcp-ports-demand=1" \
     --label 'org.nethserver.flags=core_module account_provider' \
